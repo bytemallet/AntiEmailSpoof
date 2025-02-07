@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AntiEmailSpoof - Email Domain Security Checker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>AntiEmailSpoof - Email Domain Security Checker</h1>
+        <div class="checker-box">
+            <input type="text" id="domainInput" placeholder="Enter email domain (e.g., gmail.com)">
+            <button onclick="checkDomain()" id="checkButton">Check Security</button>
+        </div>
+        
+        <div class="result-box" id="resultBox">
+            <div class="loader" id="loader"></div>
+            <div id="resultText"></div>
+        </div>
+
+        <div class="info-section">
+            <h2>How It Works</h2>
+            <p>This tool checks two essential email security protocols:</p>
+            <ul>
+                <li><strong>SPF (Sender Policy Framework)</strong>: Verifies which mail servers are authorized to send emails from your domain.</li>
+                <li><strong>DMARC (Domain-based Message Authentication, Reporting & Conformance)</strong>: Tells receiving mail servers what to do with unauthorized emails.</li>
+            </ul>
+
+            <h2>Why It's Important</h2>
+            <p>Email spoofing is a common technique used in phishing attacks where attackers impersonate legitimate email addresses. Proper SPF and DMARC configuration helps prevent:</p>
+            <ul>
+                <li>Phishing attacks</li>
+                <li>Brand impersonation</li>
+                <li>Email fraud</li>
+            </ul>
+
+            <h2>Recommended Configuration</h2>
+            <p>To secure your domain against email spoofing:</p>
+            <ol>
+                <li>Set up SPF record with all legitimate mail servers:
+                    <div class="code-example">
+                        <code>v=spf1 include:_spf.google.com include:_spf.microsoft.com ip4:192.168.1.1 -all</code>
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                    <p class="example-explanation">This example allows emails from Google Workspace, Microsoft 365, and a specific IP address.</p>
+                </li>
+                <li>Configure DMARC policy:
+                    <div class="code-example">
+                        <code>v=DMARC1; p=reject; rua=mailto:reports@yourdomain.com; pct=100</code>
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                    <p class="example-explanation">Where:</p>
+                    <ul>
+                        <li><code>p=reject</code> - Reject unauthorized emails</li>
+                        <li><code>rua=mailto:reports@yourdomain.com</code> - Where to send reports</li>
+                        <li><code>pct=100</code> - Apply to 100% of emails</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h2>Check Manually</h2>
+            <p>You can verify your domain's configuration using these commands:</p>
+            
+            <h3>Check SPF Record:</h3>
+            <div class="code-example">
+                <code>dig TXT yourdomain.com</code>
+                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+            </div>
+            <p class="example-output">
+                Expected output example:<br>
+                <code>yourdomain.com. 3600 IN TXT "v=spf1 include:_spf.google.com -all"</code>
+            </p>
+
+            <h3>Check DMARC Record:</h3>
+            <div class="code-example">
+                <code>dig TXT _dmarc.yourdomain.com</code>
+                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+            </div>
+            <p class="example-output">
+                Expected output example:<br>
+                <code>_dmarc.yourdomain.com. 3600 IN TXT "v=DMARC1; p=reject; rua=mailto:reports@yourdomain.com; pct=100"</code>
+            </p>
+
+            <div class="note-box">
+                <h4>📝 Note:</h4>
+                <p>Replace 'yourdomain.com' with your actual domain name in all examples above.</p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+    <script>
+        kofiWidgetOverlay.draw('bytemallet', {
+            'type': 'floating-chat',
+            'floating-chat.donateButton.text': 'Support me',
+            'floating-chat.donateButton.background-color': '#00b9fe',
+            'floating-chat.donateButton.text-color': '#fff'
+        });
+    </script>
+</body>
+</html> 
