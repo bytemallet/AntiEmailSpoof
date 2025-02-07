@@ -3,7 +3,7 @@
 AntiEmailSpoof is a simple, user-friendly tool that helps you check if your email domain is properly configured to prevent email spoofing. It analyzes your domain's SPF and DMARC records to assess its security posture against email-based attacks.
 
 ## 🌐 Live Demo
-Visit [AntiEmailSpoof](https://bytemallet.github.io/spoofershield) to try it out!
+Visit [AntiEmailSpoof](https://bytemallet.github.io/AntiEmailSpoof) to try it out!
 
 ## ✨ Features
 - Real-time domain security checking
